@@ -18,7 +18,6 @@ from conference.models import (Ticket,
                                TalkSpeaker,
                                Speaker)
 from taggit.managers import TaggableManager
-from .helpers import get_secure_storage
 
 import logging
 log = logging.getLogger('p3.models')
@@ -157,7 +156,7 @@ class TicketSIM(models.Model):
     document = models.FileField(
         verbose_name=_('ID Document'),
         upload_to=_ticket_sim_upload_to,
-        storage=get_secure_storage(),
+        storage=dsettings.SECURE_STORAGE,
         blank=True,
         help_text=_('Italian regulations require a document ID to activate a phone SIM. You can use the same ID for up to three SIMs. Any document is fine (EU driving license, personal ID card, etc).'))
     sim_type = models.CharField(
@@ -392,7 +391,7 @@ class TicketRoom(models.Model):
     document = models.FileField(
         verbose_name=_('ID Document'),
         upload_to=_ticket_sim_upload_to,
-        storage=get_secure_storage(),
+        storage=dsettings.SECURE_STORAGE,
         blank=True,
         help_text=_('Italian regulations require a document ID to book an hotel room. '
                     'Any document is fine (EU driving license, personal ID card, etc).'))
