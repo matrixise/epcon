@@ -816,6 +816,7 @@ class Fare(models.Model):
     ticket_type = models.CharField(max_length=10, choices=FARE_TICKET_TYPES, default='conference', db_index=True)
     payment_type = models.CharField(max_length=1, choices=FARE_PAYMENT_TYPE, default='p')
     blob = models.TextField(blank=True)
+    threshold = models.IntegerField(default=-1)
 
     objects = FareQuerySet.as_manager()
 

@@ -1,3 +1,5 @@
+USER_ID=$(shell id -u)
+GROUP_ID=$(shell id -g)
 
 help:
 	@echo "[DEV ENV SETUP]"
@@ -59,8 +61,8 @@ build:
 init-db:
 	docker-compose down -t 60
 	mkdir -p data/site
-	docker-compose run --rm epcon "./manage.py migrate --no-input"
-	docker-compose run --rm epcon "./manage.py create_initial_data_for_dev"
+	docker-compose run --user="$(USER_ID):$(GROUP_ID)" --rm epcon "./manage.py migrate --no-input"
+	docker-compose run --user="$(USER_ID):$(GROUP_ID)" --rm epcon "./manage.py create_initial_data_for_dev"
 
 drop-db:
 	docker-compose down -t 60
